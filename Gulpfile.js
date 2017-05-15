@@ -7,9 +7,10 @@
 ///
 ///////////////////////////////////////////////////
 
+// TODO: gulp sass doesn't pick up changes unless watcher is running;
+
 ///------------------------------------------------
 /// Import modules:
-///
 ///
 ///------------------------------------------------
 
@@ -20,6 +21,7 @@ var gulpChanged     = require('gulp-changed');
 var concurrent      = require('concurrent-transform');  // will only process files that have changed since last time
 var gulpSass        = require('gulp-sass');
 var autoPrefixer    = require('gulp-autoprefixer');
+var gulpPlumber     = require('gulp-plumber');
 
 ///------------------------------------------------
 /// Configuration:
@@ -36,7 +38,7 @@ const CONFIG = {
     PATHS: {
 	/// TODO: set paths to your project folders:
         CSS_SRC_PATH:   './tests/stylesheets/**/*.css',
-        CSS_DEST_PATH:   './tests/stylesheets/',
+        CSS_DEST_PATH:  './tests/stylesheets/',
         HTML_SRC_PATH:  '',
         HTML_DEST_PATH: '',
         IMG_SRC_PATH:   './tests/images/images_src/**/' + IMG_FILE_TYPES,
@@ -57,6 +59,7 @@ const CONFIG = {
  */
 gulp.task('responsive- images', function () {
     gulp.src(CONFIG.PATHS.IMG_SRC_PATH)
+        .pipe(gulpPlumber())
 
         // only process changed files:
         .pipe(gulpChanged(CONFIG.PATHS.IMG_DEST_PATH))
@@ -83,45 +86,31 @@ gulp.task('responsive- images', function () {
 /**
  * Compile Sass
  */
-gulp.task('compile-sass', function () {
+gulp.task('sass', function () {
     gulp.src(CONFIG.PATHS.SASS_SRC_PATH)
+        .pipe(gulpPlumber())
 
         // only process changed files:
-        // .pipe(gulpChanged(CONFIG.PATHS.SASS_SRC_PATH))
+        .pipe(gulpChanged(CONFIG.PATHS.SASS_SRC_PATH))
 
         // compile SASS:
         .pipe(gulpSass({
-                outputStyle: 'expanded'     // specifies formatting of CSS output (see github.com/sass/node-sass#outputstyle)
+                outputStyle: 'expanded'         // specifies formatting of CSS output (see github.com/sass/node-sass#outputstyle)
             }).on('error', gulpSass.logError)
         )
 
-        // destination output:
-        .pipe(gulp.dest(CONFIG.PATHS.SASS_DEST_PATH));
-});
-
-
-/**
- * Auto-prefixer
- */
-gulp.task('auto-prefixer', function () {
-    gulp.src(CONFIG.PATHS.CSS_SRC_PATH)
-
-        // only process changed files:
-        // .pipe(gulpChanged(CONFIG.PATHS.CSS_SRC_PATH))
-
         // auto-prefixer:
         .pipe(autoPrefixer({
-            browsers:   ['last 2 versions'],
-            cascade:    true,                   // visually cascade prefixes
-            flexbox:    'no-2009',              // adds flexbox prefixes ONLY for final and IE versions
-            grid:       true                    // adds IE prefixes for Grid Layouts
-
-        }).on('error', function (error) {
-            console.log(error.message);
+                browsers:   ['last 2 versions'],
+                cascade:    true,                   // visually cascade prefixes
+                flexbox:    'no-2009',              // adds flexbox prefixes ONLY for final and IE versions
+                grid:       true                    // adds IE prefixes for Grid Layouts
+            }).on('error', function (error) {
+                console.log(error.message);
         }))
 
         // destination output:
-        .pipe(gulp.dest(CONFIG.PATHS.CSS_DEST_PATH))
+        .pipe(gulp.dest(CONFIG.PATHS.SASS_DEST_PATH));
 });
 
 
@@ -130,10 +119,9 @@ gulp.task('auto-prefixer', function () {
  */
 gulp.task('watch', function() {
     /// TODO: add your tasks to watcher
-    gulp.watch(CONFIG.PATHS.SASS_SRC_PATH, ['compile-sass']);
-    gulp.watch(CONFIG.PATHS.CSS_SRC_PATH, ['auto-prefixer']);
+    gulp.watch(CONFIG.PATHS.SASS_SRC_PATH, ['sass']);
 });
 
 
 /// default task:
-gulp.task('default', ['compile-sass', 'auto-prefixer', 'watch']);
+gulp.task('default', ['sass', 'watch']);
