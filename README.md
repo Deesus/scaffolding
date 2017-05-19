@@ -11,8 +11,8 @@
 
 ### To Add:
 1. Sass/Less
-    - CSS comb
     - Future CSS
+    - refine Css Comb options
 2. Minification/concat:
     - gulp-uglify
     - gulp-minify-css

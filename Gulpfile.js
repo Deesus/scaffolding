@@ -3,11 +3,11 @@
 ///
 /// Author: Dee Reddy
 /// Created: 02-16-2017
-/// Last updated: 05-18-2017
+/// Last updated: 05-19-2017
 ///
 ///////////////////////////////////////////////////
 
-/// TODO: gulp sass doesn't pick up changes unless watcher is running;
+/// TODO: gulp sass doesn't pick up changes unless watcher is running
 
 ///------------------------------------------------
 /// Import modules:
