@@ -3,7 +3,7 @@
 ///
 /// Author: Dee Reddy
 /// Created: 02-16-2017
-/// Last updated: 05-13-2017
+/// Last updated: 05-18-2017
 ///
 ///////////////////////////////////////////////////
 
@@ -11,7 +11,6 @@
 
 ///------------------------------------------------
 /// Import modules:
-///
 ///------------------------------------------------
 
 const gulp              = require('gulp');
@@ -23,6 +22,7 @@ const gulpSass          = require('gulp-sass');
 const autoPrefixer      = require('gulp-autoprefixer');
 const gulpPlumber       = require('gulp-plumber');
 const gulpLess          = require('gulp-less');
+const gulpCssComb       = require('gulp-csscomb');          // See <https://github.com/csscomb/csscomb.js/blob/master/doc/options.md> for options
 
 ///------------------------------------------------
 /// Configuration:
@@ -41,6 +41,7 @@ const CONFIG = {
     /// set dest path to same parent folder as src folder (i.e. everything before '**/*.scss').
     PATHS: {
 	/// TODO: set paths to your project folders:
+        CSS_COMB_JSON:  './cssComb.json',
         CSS_SRC_PATH:   './tests/stylesheets/**/*.css',
         CSS_DEST_PATH:  './tests/stylesheets/',
         HTML_SRC_PATH:  '',
@@ -52,7 +53,7 @@ const CONFIG = {
         JS_SRC_PATH:    '',
         JS_DEST_PATH:   '',
         SASS_SRC_PATH:  './tests/stylesheets/**/*.scss',
-        SASS_DEST_PATH: './tests/stylesheets/css'
+        SASS_DEST_PATH: './tests/stylesheets/'
     }
 };
 
@@ -115,6 +116,9 @@ gulp.task('sass', function () {
                 console.log(error.message);
         }))
 
+        // comb CSS:
+        .pipe(gulpCssComb(CONFIG.PATHS.CSS_COMB_JSON))
+
         // destination output:
         .pipe(gulp.dest(CONFIG.PATHS.SASS_DEST_PATH));
 });
@@ -131,9 +135,10 @@ gulp.task('less', function () {
         .pipe(gulpChanged(CONFIG.PATHS.LESS_SRC_PATH))
 
         // compile LESS:
-        .pipe(gulpLess({
-                // *add LESS options*
-            }))
+        .pipe(gulpLess({ /* TODO: add LESS plugins and options */ }))
+
+        // comb CSS:
+        .pipe(gulpCssComb(CONFIG.PATHS.CSS_COMB_JSON))
 
         // destination output:
         .pipe(gulp.dest(CONFIG.PATHS.LESS_DEST_PATH));
@@ -143,7 +148,7 @@ gulp.task('less', function () {
 /**
  * Watcher
  *
- * TODO: add your tasks to here:
+ * TODO: add your tasks to here
  */
 gulp.task('watch', function() {
     gulp.watch(CONFIG.PATHS.SASS_SRC_PATH, ['sass']);
