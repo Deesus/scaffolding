@@ -7,21 +7,22 @@
 ///
 ///////////////////////////////////////////////////
 
-// TODO: gulp sass doesn't pick up changes unless watcher is running;
+/// TODO: gulp sass doesn't pick up changes unless watcher is running;
 
 ///------------------------------------------------
 /// Import modules:
 ///
 ///------------------------------------------------
 
-var gulp            = require('gulp');
-var gulpImageResize = require('gulp-image-resize');	    // See <https://www.npmjs.com/package/gulp-image-resize>
-var gulpRename      = require('gulp-rename');
-var gulpChanged     = require('gulp-changed');
-var concurrent      = require('concurrent-transform');  // will only process files that have changed since last time
-var gulpSass        = require('gulp-sass');
-var autoPrefixer    = require('gulp-autoprefixer');
-var gulpPlumber     = require('gulp-plumber');
+const gulp              = require('gulp');
+const gulpImageResize   = require('gulp-image-resize');	    // See <https://www.npmjs.com/package/gulp-image-resize>
+const gulpRename        = require('gulp-rename');
+const gulpChanged       = require('gulp-changed');
+const concurrent        = require('concurrent-transform');  // will only process files that have changed since last time
+const gulpSass          = require('gulp-sass');
+const autoPrefixer      = require('gulp-autoprefixer');
+const gulpPlumber       = require('gulp-plumber');
+const gulpLess          = require('gulp-less');
 
 ///------------------------------------------------
 /// Configuration:
@@ -35,12 +36,17 @@ const IMG_FILE_TYPES = '*.{jpg,png}';
 const CONFIG = {
     /// TODO: perhaps it would be more apt to place some of these in a 'RESPONSIVE_CONFIG' objects
     /// file paths of folders:
+
+    /// To compile .css files files into the same location as .less/.sass files,
+    /// set dest path to same parent folder as src folder (i.e. everything before '**/*.scss').
     PATHS: {
 	/// TODO: set paths to your project folders:
         CSS_SRC_PATH:   './tests/stylesheets/**/*.css',
         CSS_DEST_PATH:  './tests/stylesheets/',
         HTML_SRC_PATH:  '',
         HTML_DEST_PATH: '',
+        LESS_SRC_PATH:  './tests/stylesheets/**/*.less',
+        LESS_DEST_PATH: './tests/stylesheets/',
         IMG_SRC_PATH:   './tests/images/images_src/**/' + IMG_FILE_TYPES,
         IMG_DEST_PATH:  './tests/images/images_target',
         JS_SRC_PATH:    '',
@@ -57,7 +63,7 @@ const CONFIG = {
 /**
  * Responsive Images
  */
-gulp.task('responsive- images', function () {
+gulp.task('responsive-images', function () {
     gulp.src(CONFIG.PATHS.IMG_SRC_PATH)
         .pipe(gulpPlumber())
 
@@ -84,7 +90,7 @@ gulp.task('responsive- images', function () {
 
 
 /**
- * Compile Sass
+ * Compile/process Sass
  */
 gulp.task('sass', function () {
     gulp.src(CONFIG.PATHS.SASS_SRC_PATH)
@@ -95,7 +101,7 @@ gulp.task('sass', function () {
 
         // compile SASS:
         .pipe(gulpSass({
-                outputStyle: 'expanded'         // specifies formatting of CSS output (see github.com/sass/node-sass#outputstyle)
+                outputStyle: 'expanded'             // specifies formatting of CSS output (see github.com/sass/node-sass#outputstyle)
             }).on('error', gulpSass.logError)
         )
 
@@ -115,13 +121,35 @@ gulp.task('sass', function () {
 
 
 /**
+ * Compile/process Less
+ */
+gulp.task('less', function () {
+    gulp.src(CONFIG.PATHS.LESS_SRC_PATH)
+        .pipe(gulpPlumber())
+
+        // only process changed files:
+        .pipe(gulpChanged(CONFIG.PATHS.LESS_SRC_PATH))
+
+        // compile LESS:
+        .pipe(gulpLess({
+                // *add LESS options*
+            }))
+
+        // destination output:
+        .pipe(gulp.dest(CONFIG.PATHS.LESS_DEST_PATH));
+});
+
+
+/**
  * Watcher
+ *
+ * TODO: add your tasks to here:
  */
 gulp.task('watch', function() {
-    /// TODO: add your tasks to watcher
     gulp.watch(CONFIG.PATHS.SASS_SRC_PATH, ['sass']);
+    gulp.watch(CONFIG.PATHS.LESS_SRC_PATH, ['less']);
 });
 
 
 /// default task:
-gulp.task('default', ['sass', 'watch']);
+gulp.task('default', ['sass', 'less', 'watch']);
