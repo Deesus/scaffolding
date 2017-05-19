@@ -7,6 +7,7 @@
   "devDependencies": {
     "concurrent-transform": "^1.0.0",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
     "gulp-changed": "^2.0.0",
     "gulp-csscomb": "^3.0.8",
     "gulp-image-resize": "^0.12.0",
