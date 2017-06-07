@@ -42,18 +42,18 @@ const CONFIG = {
     PATHS: {
 	/// TODO: set paths to your project folders:
         CSS_COMB_JSON:  './cssComb.json',
-        CSS_SRC_PATH:   './tests/stylesheets/**/*.css',
-        CSS_DEST_PATH:  './tests/stylesheets/',
+        CSS_SRC_PATH:   './local/stylesheets/**/*.css',
+        CSS_DEST_PATH:  './local/stylesheets/',
         HTML_SRC_PATH:  '',
         HTML_DEST_PATH: '',
-        LESS_SRC_PATH:  './tests/stylesheets/**/*.less',
-        LESS_DEST_PATH: './tests/stylesheets/',
-        IMG_SRC_PATH:   './tests/images/images_src/**/' + IMG_FILE_TYPES,
-        IMG_DEST_PATH:  './tests/images/images_target',
+        LESS_SRC_PATH:  './local/stylesheets/**/*.less',
+        LESS_DEST_PATH: './local/stylesheets/',
+        IMG_SRC_PATH:   './local/images/images_src/**/' + IMG_FILE_TYPES,
+        IMG_DEST_PATH:  './local/images/images_target',
         JS_SRC_PATH:    '',
         JS_DEST_PATH:   '',
-        SASS_SRC_PATH:  './tests/stylesheets/**/*.scss',
-        SASS_DEST_PATH: './tests/stylesheets/'
+        SASS_SRC_PATH:  './local/stylesheets/**/*.scss',
+        SASS_DEST_PATH: './local/stylesheets/'
     }
 };
 
