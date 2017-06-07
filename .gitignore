@@ -1,3 +1,14 @@
+# unversioned local files:
+local/
+local.*
+
+# IDEs:
 .idea/
+
+# libraries:
 node_modules/
-tests/
+
+# cached files:
+.sass-cache/
+*.pyc
+.ipynb_checkpoints/

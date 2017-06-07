@@ -7,13 +7,14 @@
 ### Quick start:
 1. copy _Gulpfile_ and _package.json_ to your project
 2. cd to project folder and install modules: `$ npm install`
-3. set properties/options in the Gulpfile (`CONFIG` object)
+3. set global properties/options in the Gulpfile (`CONFIG` object)
+4. set options for css comb (`cssComb.json`)
 
 ### To Add:
 1. Sass/Less
     - Future CSS
-    - refine Css Comb options
-2. Minification/concat:
+    - refine CSS Comb options
+2. minification/concat:
     - gulp-uglify
     - gulp-minify-css
     - gulp-minify-html
