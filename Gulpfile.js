@@ -3,7 +3,7 @@
 ///
 /// Author: Dee Reddy
 /// Created: 02-16-2017
-/// Last updated: 05-19-2017
+/// Last updated: 06-06-2017
 ///
 ///////////////////////////////////////////////////
 
@@ -21,7 +21,6 @@ const concurrent        = require('concurrent-transform');  // will only process
 const gulpSass          = require('gulp-sass');
 const autoPrefixer      = require('gulp-autoprefixer');
 const gulpPlumber       = require('gulp-plumber');
-const gulpLess          = require('gulp-less');
 const gulpCssComb       = require('gulp-csscomb');          // See <https://github.com/csscomb/csscomb.js/blob/master/doc/options.md> for options
 
 ///------------------------------------------------
@@ -37,7 +36,7 @@ const CONFIG = {
     /// TODO: perhaps it would be more apt to place some of these in a 'RESPONSIVE_CONFIG' objects
     /// file paths of folders:
 
-    /// To compile .css files files into the same location as .less/.sass files,
+    /// To compile .css files files into the same location as .scss files,
     /// set dest path to same parent folder as src folder (i.e. everything before '**/*.scss').
     PATHS: {
 	/// TODO: set paths to your project folders:
@@ -46,8 +45,6 @@ const CONFIG = {
         CSS_DEST_PATH:  './local/stylesheets/',
         HTML_SRC_PATH:  '',
         HTML_DEST_PATH: '',
-        LESS_SRC_PATH:  './local/stylesheets/**/*.less',
-        LESS_DEST_PATH: './local/stylesheets/',
         IMG_SRC_PATH:   './local/images/images_src/**/' + IMG_FILE_TYPES,
         IMG_DEST_PATH:  './local/images/images_target',
         JS_SRC_PATH:    '',
@@ -125,36 +122,14 @@ gulp.task('sass', function () {
 
 
 /**
- * Compile/process Less
- */
-gulp.task('less', function () {
-    gulp.src(CONFIG.PATHS.LESS_SRC_PATH)
-        .pipe(gulpPlumber())
-
-        // only process changed files:
-        .pipe(gulpChanged(CONFIG.PATHS.LESS_SRC_PATH))
-
-        // compile LESS:
-        .pipe(gulpLess({ /* TODO: add LESS plugins and options */ }))
-
-        // comb CSS:
-        .pipe(gulpCssComb(CONFIG.PATHS.CSS_COMB_JSON))
-
-        // destination output:
-        .pipe(gulp.dest(CONFIG.PATHS.LESS_DEST_PATH));
-});
-
-
-/**
  * Watcher
  *
  * TODO: add your tasks to here
  */
 gulp.task('watch', function() {
     gulp.watch(CONFIG.PATHS.SASS_SRC_PATH, ['sass']);
-    gulp.watch(CONFIG.PATHS.LESS_SRC_PATH, ['less']);
 });
 
 
 /// default task:
-gulp.task('default', ['sass', 'less', 'watch']);
+gulp.task('default', ['sass', 'watch']);
