@@ -28,11 +28,11 @@
 4. set up directories
 
 ### Wish list:
-1. add time stamp to css, js files
+1. add time stamp query string to img, icon, css, js, etc. files
 2. convert .aspx comment delimiters (`<%--` `--%>`) to html comment delimiters (`<!--` `--!>`)
 
 ### Issues:
-- Gulp doesn't pick up changes to .scss file unless watcher is running when changes are made (.less always works, though).
+- NONE
 
 ### License
 Copyright © Dee Reddy. BSD-2 License.

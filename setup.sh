@@ -10,7 +10,7 @@ npm install
 cat <<EOF > CHANGELOG.md
 EOF
 
-cat <<EOF > local.README.md
+cat <<EOF > README.md
 # TODO: APP_NAME
 ###### TODO: APP_DESCRIPTION
 
@@ -33,6 +33,7 @@ cat <<EOF > local.README.md
 
 ### License:
 Copyright © Dee Reddy. BSD-2 License.
+
 EOF
 
 
@@ -43,8 +44,9 @@ EOF
 ## TODO: uncomment the following section for production. WARNING: removes entire revision history.
 ## ------------------------------------------
 ## clean up:
+
 ## start fresh version control:
-#rm -r .git
+#sudo rm -r .git
 #git init
 #git add .
 #git commit -am "Initial commit."
