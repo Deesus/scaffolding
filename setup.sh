@@ -25,8 +25,9 @@ cat <<EOF > local.README.md
 
 ### TODO:
 + [ ] update package.json (name of application, etc.)
-+ [ ] replace file paths in Gulpfile.js
++ [ ] set global properties/options in the Gulpfile (e.g. `CONFIG` object, file paths, etc.)
     + [ ] remove completed TODOs from Gulpfile
++ [ ] update settings in cssComb.json if needed
 + [ ] update this README.md with relevant info (app name, license, etc.)
 + [ ] change LICENSE if needed
 

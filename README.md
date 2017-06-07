@@ -1,25 +1,31 @@
-# Scaffolding Projects with Gulp
-###### Common tasks configured for Gulp
+# Project Scaffolding with Gulp
+###### Scaffold your web project
+
+- sets up CSS preprocessor, watcher, plugins
+- TODO: set up directories
 
 ### Requirements:
-- NodeJS/npm
+- git
+- NodeJS
+- npm
 
 ### Quick start:
-1. copy _Gulpfile_ and _package.json_ to your project
-2. cd to project folder and install modules: `$ npm install`
+1. run `setup.sh`
+2. see generated `README` to list of TODO items.
+3. update attributes and settings for your project.
 3. set global properties/options in the Gulpfile (`CONFIG` object)
-4. set options for css comb (`cssComb.json`)
 
-### To Add:
-1. Sass/Less
-    - Future CSS
+### TODO:
+1. Browser Sync
+2. Sass/Less
+    - CSS next (?)
     - refine CSS Comb options
-2. minification/concat:
+3. minification/concat:
     - gulp-uglify
     - gulp-minify-css
     - gulp-minify-html
     - gulp-concat
-3. Browser Sync
+4. set up directories
 
 ### Wish list:
 1. add time stamp to css, js files
