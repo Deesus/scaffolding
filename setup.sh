@@ -10,6 +10,9 @@ npm install
 cat <<EOF > CHANGELOG.md
 EOF
 
+cat <<EOF > ISSUES.md
+EOF
+
 cat <<EOF > README.md
 # TODO: APP_NAME
 ###### TODO: APP_DESCRIPTION
