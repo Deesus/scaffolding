@@ -2,11 +2,16 @@
 
 
 # ------------------------------------------
+# create directories:
+mkdir dist src docs
+
+
+# ------------------------------------------
 # create documentation files:
-cat <<EOF > CHANGELOG.md
+cat <<EOF > docs/CHANGELOG.md
 EOF
 
-cat <<EOF > ISSUES.md
+cat <<EOF > docs/ISSUES.md
 EOF
 
 cat <<EOF > README.md
@@ -85,6 +90,7 @@ node_modules/
 
 # misc:
 *.css.map
+setup.sh
 
 EOF
 
@@ -288,11 +294,6 @@ EOF
 
 
 # ------------------------------------------
-# create directories:
-mkdir dist src
-
-
-# ------------------------------------------
 # install packages:
 npm install
 
@@ -301,7 +302,6 @@ npm install
 # clean up:
 
 # start fresh version control:
-sudo rm -r .git
 git init
 git add .
 git commit -am "Initial commit."
