@@ -10,7 +10,7 @@
 - npm
 
 ### Quick start:
-1. run `setup.sh`
+1. run `setup.sh` found in `/dist`
 2. see generated `README` to list of TODO items
 3. update attributes and settings for your project
 3. set global properties/options in the Gulpfile (`CONFIG` object)
