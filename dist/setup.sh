@@ -29,9 +29,7 @@ cat <<EOF > README.md
 
 ### TODO:
 + [ ] update package.json (name of application, etc.)
-+ [ ] set global properties/options in the Gulpfile (e.g. `CONFIG` object, file paths, etc.)
-    + [ ] remove completed TODOs from Gulpfile
-+ [ ] update settings in cssComb.json if needed
++ [ ] update Webpack config (set global properties/options, file paths, etc.); remove TODOs
 + [ ] update this README.md with relevant info (app name, license, etc.)
 + [ ] change LICENSE if needed
 
@@ -43,7 +41,7 @@ EOF
 cat <<EOF > LICENSE
 BSD 2-Clause License
 
-Copyright (c) 2017, Dee Reddy
+Copyright (c) 2018, Dee Reddy
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -102,53 +100,12 @@ cat<<EOF > package.json
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "concurrent-transform": "^1.0.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-changed": "^2.0.0",
-    "gulp-csscomb": "^3.0.8",
-    "gulp-image-resize": "^0.12.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dee Reddy",
   "license": "BSD-2-Clause"
-}
-
-EOF
-
-cat <<EOF > cssComb.json
-{
-  "exclude": [
-    ".git/**",
-    "node_modules/**",
-    "bower_components/**"
-  ],
-  "always-semicolon": true,
-  "block-indent": "  ",
-  "color-case": "lower",
-  "color-shorthand": true,
-  "element-case": "lower",
-  "eof-newline": true,
-  "leading-zero": false,
-  "quotes": "single",
-  "remove-empty-rulesets": true,
-  "space-after-colon": " ",
-  "space-after-combinator": " ",
-  "space-after-opening-brace": "\n",
-  "space-after-selector-delimiter": "\n",
-  "space-before-closing-brace": "\n",
-  "space-before-colon": "",
-  "space-before-combinator": " ",
-  "space-before-opening-brace": "\n",
-  "space-before-selector-delimiter": "",
-  "strip-spaces": true,
-  "unitless-zero": true,
-  "vendor-prefix-align": true
 }
 
 EOF
@@ -177,7 +134,6 @@ const concurrent        = require('concurrent-transform');  // will only process
 const gulpSass          = require('gulp-sass');
 const autoPrefixer      = require('gulp-autoprefixer');
 const gulpPlumber       = require('gulp-plumber');
-const gulpCssComb       = require('gulp-csscomb');          // See <https://github.com/csscomb/csscomb.js/blob/master/doc/options.md> for options
 
 ///------------------------------------------------
 /// Configuration:
@@ -196,7 +152,6 @@ const CONFIG = {
     /// set dest path to same parent folder as src folder (i.e. everything before '**/*.scss').
     PATHS: {
 	/// TODO: set paths to your project folders:
-        CSS_COMB_JSON:  './cssComb.json',
         CSS_SRC_PATH:   './local/stylesheets/**/*.css',
         CSS_DEST_PATH:  './local/stylesheets/',
         HTML_SRC_PATH:  '',
@@ -268,9 +223,6 @@ gulp.task('sass', function () {
             }).on('error', function (error) {
                 console.log(error.message);
         }))
-
-        // comb CSS:
-        .pipe(gulpCssComb(CONFIG.PATHS.CSS_COMB_JSON))
 
         // destination output:
         .pipe(gulp.dest(CONFIG.PATHS.SASS_DEST_PATH));
