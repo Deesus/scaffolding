@@ -102,15 +102,17 @@ cat<<EOF > package.json
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.3",
-    "webpack": "^4.0.0",
+    "webpack": "^4.0.0"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dee Reddy",
-  "license": "BSD-2-Clause"
+  "license": "BSD-2-Clause",
+  "homepage": "https://github.com/Deesus/scaffolding"
 }
+
 
 EOF
 
