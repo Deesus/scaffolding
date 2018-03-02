@@ -1,8 +1,8 @@
-# Project Scaffolding with Gulp
+# Project Scaffolding with Webpack
 ###### Scaffold your web project
 
-- sets up CSS preprocessor, watcher, plugins
-- TODO: set up directories
+- Sets up Webpack plugins: asset/module bundling, minnification, LESS, etc.
+- Sets up directories, LICENSE, `.gitignore`, docs
 
 ### Requirements:
 - git
@@ -10,26 +10,24 @@
 - npm
 
 ### Quick start:
-1. run `setup.sh` found in `/dist`
-2. see generated `README` to list of TODO items
-3. update attributes and settings for your project
-3. set global properties/options in the Gulpfile (`CONFIG` object)
+1. Copy files/folders (including `.gitignore`)
+2. Configure Webpack options
+3. Replace README w/
 
 ### TODO:
-1. Browser Sync
-2. Sass/Less
-    - CSS next (?)
-    - refine CSS Comb options
-3. minification/concat:
-    - gulp-uglify
-    - gulp-minify-css
-    - gulp-minify-html
-    - gulp-concat
-4. set up directories
+1. Add normalize.css
+2. Webpack plugins to add:
+    - watcher
+    - VueJS hot loader
+    - webpack clean
+    - chunk splitter
+    - dynamic loading
+    - LESS + autoprefix + Post CSS
+3. Add NodeJS live reload
+4. Set up directories more properly
 
 ### Wish list:
-1. add time stamp query string to img, icon, css, js, etc. files
-2. convert .aspx comment delimiters (`<%--` `--%>`) to html comment delimiters (`<!--` `--!>`)
+1. Add time stamp query string to img, icon, css, js, etc. files
 
 ### Issues:
 - NONE
