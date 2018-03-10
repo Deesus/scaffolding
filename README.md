@@ -15,16 +15,19 @@
 3. Replace README w/
 
 ### TODO:
-1. Add normalize.css
-2. Webpack plugins to add:
+- Replace `/src` and `/dist` folders w/ `/build` folder
+- Move out all old scripts/Gulpfile from project
+- Add appropriate folder structure
+- Add normalize.css
+- Webpack plugins to add:
     - watcher
     - VueJS hot loader
     - webpack clean
     - chunk splitter
     - dynamic loading
     - LESS + autoprefix + Post CSS
-3. Add NodeJS live reload
-4. Set up directories more properly
+- Add NodeJS live reload
+- Set up directories more properly
 
 ### Wish list:
 1. Add time stamp query string to img, icon, css, js, etc. files
