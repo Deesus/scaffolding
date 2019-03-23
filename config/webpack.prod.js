@@ -95,27 +95,15 @@ module.exports = {
             {
                 // n.b. the `html-webpack-plugin` does the same thing as the `file-loader` and `extract-loader`; thus, we don't use them here:
                 test: /\.html$/,
-                use: [
-                    {
-                        loader: 'html-loader'
-                    }
-                ]
+                loader: 'html-loader'
             },
 
-            // ---------- Images: ----------
+            // ---------- Files: ----------
+            // handles images, fonts, and urls in stylesheets (e.g. the CSS `background` property):
             {
-                test: /\.(jpe?g|gif|png|svg)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            // returns the (input) image name and extension but also adds a hash to the output name:
-                            name: 'images/[name]-[hash:8].[ext]'
-                        }
-                    }
-                ]
+                test: /\.(jpe?g|gif|png|svg|woff|woff2|eot|ttf)(\?[a-z0-9=.]+)?$/,
+                loader: 'file-loader'
             },
-
         ]
     },
 
@@ -131,16 +119,6 @@ module.exports = {
 
     // n.b. loaders apply a task one-at-a-time while plugins apply to all files:
     plugins: [
-
-        // TODO: uncomment if we don't want to use `cross-env` in npm script:
-        // // n.b. Webpack does't recognize environment variables (e.g. in npm scripts) unless we explicitly define them;
-        // // this adds the variable to all code during compilation:
-        // new webpack.DefinePlugin({
-        //     'process.env': {
-        //         'NODE_ENV': JSON.stringify('production')
-        //     }
-        // }),
-
         new CleanWebpackPlugin(),   // cleans `output.path` directory (`dist/` folder) before every prod build
         new OptimizeCssAssetsPlugin(),
         new MiniCSSExtractPlugin(),
