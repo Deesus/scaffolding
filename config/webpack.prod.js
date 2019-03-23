@@ -152,3 +152,8 @@ module.exports = {
         new BabelMinifyPlugin()
     ]
 };
+
+
+if (isProduction) {
+    console.log('Building and Optimizing Files...');
+}

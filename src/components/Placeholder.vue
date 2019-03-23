@@ -22,6 +22,8 @@
 
 <style scoped lang="scss">
     .placeholder {
-
+        text-align: center;
+        border: 1px solid cadetblue;
+        font-weight: bold;
     }
 </style>

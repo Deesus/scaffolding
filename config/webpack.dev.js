@@ -90,7 +90,7 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     'vue-style-loader',
-                    'css-loader',           // style-loader is responsible for injecting the css into the html
+                    'css-loader',
                     'sass-loader'
                 ]
             },
@@ -102,7 +102,7 @@ module.exports = {
                 // specify loaders:
                 use: [
                     'vue-style-loader',
-                    'style-loader',         // style-loader is responsible for injecting the css into the html
+                    'style-loader',
                     'css-loader'
                 ]
             },
@@ -154,8 +154,3 @@ module.exports = {
         })
     ]
 };
-
-
-if (process.env.NODE_ENV === 'development') {
-    console.log('---------- Running in development mode ----------');
-}

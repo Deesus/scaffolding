@@ -8,14 +8,14 @@
 // transforms everything after this; see <https://babeljs.io/docs/en/babel-register/>
 require('babel-register');
 
-// if we wanted to use ES6 modules, we would do this instead:
-// import Express from 'express';
-// import path from 'path';
+const PORT_NUMBER  = process.env.PORT || 8080;
+const isProduction = process.env.NODE_ENV === 'production';
+
+const opn       = require('opn');
 const path      = require('path');
 const Express   = require('express');
 const server    = Express();
-
-const isProduction = process.env.NODE_ENV === 'production';
+const staticMiddleware = Express.static('dist');
 
 
 // --------------------------------------------------
@@ -38,16 +38,25 @@ if (!isProduction) {
 
     server.use(webpackDevMiddleware);
     server.use(webpackHotMiddleware);
+
+    // start server:
+    server.use(staticMiddleware);
+
+    server.listen(PORT_NUMBER, () => {
+        console.log('\n---------- Starting in development mode ----------');
+        console.log(`Server is listening to http://localhost:${PORT_NUMBER}\n`);
+    });
+
+    opn(`http://localhost:${PORT_NUMBER}`);
 }
 
-
 // --------------------------------------------------
-// shared dev and production:
+// if production mode:
 // --------------------------------------------------
-const staticMiddleware = Express.static('dist');
-server.use(staticMiddleware);
+else {
+    server.use(staticMiddleware);
 
-const PORT_NUMBER = process.env.PORT || 8080;
-server.listen(PORT_NUMBER, () => {
-    console.log(`\nServer is listening to http://localhost:${PORT_NUMBER}\n`);
-});
+    server.listen(PORT_NUMBER, () => {
+        console.log(`\nServer is listening to http://localhost:${PORT_NUMBER}\n`);
+    });
+}
