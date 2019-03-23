@@ -1,0 +1,199 @@
+@import "../base/_constants";
+
+
+// ==================================================
+//  animation duration classes:
+// ==================================================
+// n.b. we keep the animation durations as a separate class due to how Vue toggles classes in <transition> tags
+// also n.b. a gotcha in Vue transitions: we can't use attribute selectors (e.g. `[class*="animate"]`)
+
+.animate-200 {
+    animation-duration: 200ms;
+    animation-fill-mode: both;
+}
+
+.animate-400 {
+    animation-duration: 400ms;
+    animation-fill-mode: both;
+}
+
+.animate-500 {
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+}
+
+.animate-700 {
+    animation-duration: 700ms;
+    animation-fill-mode: both;
+}
+
+
+// ==================================================
+//  slides:
+// ==================================================
+
+// ---------- fade-slide-out left: ----------
+@keyframes fade-slide-out-left {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translate3d(-15%, 0, 0);
+        transform: translate3d(-15%, 0, 0);
+    }
+}
+
+.fade-slide-out-left {
+    animation-timing-function: ease-in-out;
+    animation-name: fade-slide-out-left;
+}
+
+
+// ---------- fade-slide-in left: ----------
+@keyframes fade-slide-in-left {
+    0% {
+        -webkit-transform: translate3d(-15%, 0, 0);
+        transform: translate3d(-15%, 0, 0);
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.fade-slide-in-left {
+    animation-timing-function: ease-in-out;
+    animation-name: fade-slide-in-left;
+}
+
+// ---------- fade-slide-out right: ----------
+@keyframes fade-slide-out-right {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translate3d(15%, 0, 0);
+        transform: translate3d(15%, 0, 0);
+    }
+}
+
+.fade-slide-out-right {
+    animation-timing-function: ease-in-out;
+    animation-name: fade-slide-out-right;
+}
+
+// ---------- fade-slide-in right: ----------
+@keyframes fade-slide-in-right {
+    0% {
+        -webkit-transform: translate3d(15%, 0, 0);
+        transform: translate3d(15%, 0, 0);
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.fade-slide-in-right {
+    animation-timing-function: ease-in-out;
+    animation-name: fade-slide-in-right;
+}
+
+// ---------- slide-in left: ----------
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(-1000px) translateZ(0);
+    }
+
+    100% {
+        transform: translateX(0) translateZ(0);
+    }
+}
+
+.slide-in-left {
+    animation-timing-function: ease-in-out;
+    animation-name: slide-in-left;
+}
+
+// ---------- slide-out left: ----------
+@keyframes slide-out-left {
+    0% {
+        transform: translateX(0) translateZ(0);
+    }
+
+    100% {
+        transform: translateX(-1000px) translateZ(0);
+    }
+}
+
+.slide-out-left {
+    animation-timing-function: ease-in-out;
+    animation-name: slide-out-left;
+}
+
+
+// ==================================================
+//  fades:
+// ==================================================
+
+// ---------- fade in: ----------
+@keyframes fade-in  {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-enter-active {
+    animation-timing-function: ease-in-out;
+    animation-name: fade-in;
+}
+
+// ---------- fade out: ----------
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.fade-leave-active {
+    animation-timing-function: ease-in-out;
+    animation-name: fade-out;
+}
